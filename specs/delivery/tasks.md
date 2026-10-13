@@ -30,6 +30,15 @@
 
 **Objetivo:** um pull request de exemplo passa por todo o CI (tipos, lint, testes, build das 3 imagens). Ref.: [ADR-0001](../adr/0001-monorepo-tres-aplicacoes.md), [ADR-0005](../adr/0005-ci-cd.md), [apps/README.md](../apps/README.md).
 
+> **Situação (13/10/2026):** T-I0-01 a T-I0-08 implementadas e verificadas localmente (tipos, lint, Prettier, teste contra `postgres-test`, build e 3 imagens, com a API e o proxy do `crm-web` exercitados em contêiner). **Nenhuma está marcada `[x]` ainda:** falta o PR de exemplo com o CI verde e a proteção da `main` (T-I0-08).
+>
+> **Decisões de implementação a confirmar:**
+> - Versões fixadas pelas compatibilidades: TypeScript 6.0 (`typescript-eslint` não aceita 7), ESLint 9 (`eslint-plugin-jsx-a11y` não aceita 10), Prisma 7.10 com `@prisma/adapter-pg`, Astro 7, Vite 8, Node 24 LTS. Versões com menos de 24 h foram evitadas (política `minimumReleaseAge` do pnpm 12).
+> - Portas locais: `postgres` em **5436** e `postgres-test` em **5435**, porque 5432 (PostgreSQL nativo) e 5433/5434 (outro projeto) estavam ocupadas nesta máquina.
+> - O `GET /api/health` fica direto em `app.ts`, sem módulo e sem teste, e devolve só `{ "ok": true }` (decisão de Arthur, 13/10/2026: o padrão de módulos será definido depois). **Não verifica o banco**, ao contrário do que T-I0-06 e `contracts/auth.md` previam; ajustar quando o padrão for definido. O Vitest passa sem testes (`passWithNoTests`).
+> - Scripts no padrão do app do flex: `@zarco/contracts` exportado como TypeScript e embutido no bundle da API pelo `tsup`; `prisma generate` no `postinstall`.
+> - O Prisma Client é gerado em `apps/crm-api/src/generated` (ignorado pelo git) por `prisma generate`, encadeado em `build`, `typecheck` e `test`.
+
 - [ ] **T-I0-01 · Monorepo pnpm**
   Criar `package.json` da raiz (scripts `dev`, `build`, `typecheck`, `lint`, `format:check`, `test`), `pnpm-workspace.yaml` (`apps/*`, `packages/*`), `.nvmrc` com a LTS vigente e `engines`. `.gitignore` incluindo `node_modules`, `dist`, `.env*` e a pasta de uploads.
   *Pronto quando:* `pnpm install` funciona na raiz.

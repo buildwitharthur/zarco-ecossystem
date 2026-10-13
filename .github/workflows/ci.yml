@@ -1,0 +1,64 @@
+# ADR-0005: o CI só verifica e constrói. Não publica imagens nem aciona implantação.
+name: CI
+
+on:
+  pull_request:
+  push:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Tipos, lint e testes
+    runs-on: ubuntu-latest
+    services:
+      postgres-test:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: zarco
+          POSTGRES_PASSWORD: zarco
+          POSTGRES_DB: zarco_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U zarco -d zarco_test"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    env:
+      # Valores de teste, sem segredos (apps/README.md §4).
+      TEST_DATABASE_URL: postgresql://zarco:zarco@localhost:5432/zarco_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Tipos
+        run: pnpm typecheck
+      - name: Lint
+        run: pnpm lint
+      - name: Formatação
+        run: pnpm format:check
+      - name: Testes
+        run: pnpm test
+
+  images:
+    name: Imagem ${{ matrix.app }}
+    needs: verify
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [landing, crm-web, crm-api]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build da imagem (sem publicar)
+        run: docker build -f apps/${{ matrix.app }}/Dockerfile -t zarco-${{ matrix.app }}:ci .

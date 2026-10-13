@@ -1,0 +1,12 @@
+node_modules
+dist
+.astro
+pnpm-lock.yaml
+apps/crm-api/src/generated
+apps/crm-web/src/routeTree.gen.ts
+apps/crm-api/prisma/migrations
+# Fontes oficiais, não reformatar
+specs
+prototypes
+assets
+AGENTS.md

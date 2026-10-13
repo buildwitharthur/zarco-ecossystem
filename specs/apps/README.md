@@ -77,6 +77,9 @@ As migrações do Prisma rodam no início do `crm-api`, antes do servidor aceita
 | `JWT_EXPIRES_IN` | crm-api | `8h` (CA-CRM-01.5) |
 | `UPLOAD_DIR` | crm-api | Caminho do volume de arquivos |
 | `PUBLIC_WHATSAPP_NUMBER`, `PUBLIC_WHATSAPP_MESSAGE` | landing (build) | Destino de conversão (RNF-LP-09) |
+| `PORT` | crm-api | Porta HTTP (padrão `3000`) |
+| `TEST_DATABASE_URL` | testes da crm-api | Banco de teste (`postgres-test`). Os testes usam só esta variável, nunca `DATABASE_URL`, porque apagam dados. |
+| `API_UPSTREAM` | crm-web (nginx) | Destino do proxy `/api` (padrão `http://crm-api:3000`) |
 
 Segredos de produção ficam somente no Coolify, nunca no repositório. O CI usa apenas valores de teste, definidos no próprio workflow.
 

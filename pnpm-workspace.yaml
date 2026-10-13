@@ -1,0 +1,9 @@
+packages:
+  - apps/*
+  - packages/*
+
+# Scripts de instalação permitidos (o pnpm bloqueia os demais por padrão).
+allowBuilds:
+  '@prisma/engines': true
+  esbuild: true
+  prisma: true

@@ -1,0 +1,10 @@
+// Os modelos entram com os incrementos C1 em diante (User, Client, Project…).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}

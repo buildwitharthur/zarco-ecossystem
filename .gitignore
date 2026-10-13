@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.astro/
+*.tsbuildinfo
+coverage/
+
+# Segredos e configuração local
+.env
+.env.*
+!.env.example
+
+# Arquivos enviados (UPLOAD_DIR)
+uploads/
+
+# Prisma Client gerado
+apps/crm-api/src/generated/
+
+# Sistema e editor
+.DS_Store
+Thumbs.db

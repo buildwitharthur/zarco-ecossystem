@@ -46,10 +46,10 @@ Autenticada. Usada pela SPA ao carregar, para saber se existe sessão (G1).
 Pública. Usada pelo Coolify e pelo CI para verificar se o serviço está no ar.
 
 ```json
-{ "status": "ok", "database": "ok" }
+{ "ok": true }
 ```
 
-Responde `503` com `"database": "error"` se o PostgreSQL não responder. Não expõe versão nem outros detalhes.
+Na I0 não verifica o banco (decisão de Arthur, 13/10/2026). O schema está em `packages/contracts` (`healthResponseSchema`).
 
 ## Comando administrativo (fora da API)
 
