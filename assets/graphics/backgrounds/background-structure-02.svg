@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" role="img" aria-label="Fundo técnico 02: Z Percurso em escala grande">
+  <title>Fundo técnico 02: Z Percurso em escala grande</title>
+  <rect width="1920" height="1080" fill="#F4F3EF"/>
+  <path d="M96.5 0V1080M217.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M242.5 0V1080M363.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M388.5 0V1080M509.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M534.5 0V1080M655.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M680.5 0V1080M801.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M826.5 0V1080M947.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M972.5 0V1080M1093.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1118.5 0V1080M1239.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1264.5 0V1080M1385.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1410.5 0V1080M1531.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1556.5 0V1080M1677.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1702.5 0V1080M1823.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M0 216.5H1920" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M0 432.5H1920" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M0 648.5H1920" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M0 864.5H1920" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M960.5 -95.5H1824.5V120.5L1074.98 768.5H1824.5V984.5H744.5V768.5L1494.02 120.5H960.5Z" fill="none" stroke="#17181A" stroke-width="1"/><rect x="1608" y="768" width="216" height="216" fill="#FF5A1F"/>
+</svg>

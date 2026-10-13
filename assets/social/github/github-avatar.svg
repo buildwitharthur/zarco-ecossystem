@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="Zarco">
+  <title>Zarco</title>
+  <rect width="500" height="500" fill="#17181A"/>
+  <path d="M175 125H375V175L201.5 325H325V375H125V325L298.5 175H175Z" fill="#EDEBE6"/>
+  <rect x="325" y="325" width="50" height="50" fill="#FF5A1F"/>
+</svg>

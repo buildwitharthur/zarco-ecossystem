@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 12" width="120" height="12" role="img" aria-label="Seta de fluxo">
+  <title>Seta de fluxo</title>
+  <path d="M0 6H112" stroke="#5F6168" stroke-width="1"/>
+  <path d="M112 2.5L120 6L112 9.5Z" fill="#5F6168"/>
+</svg>

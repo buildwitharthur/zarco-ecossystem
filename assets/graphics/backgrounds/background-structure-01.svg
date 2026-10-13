@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" role="img" aria-label="Fundo técnico 01: grid e marcadores">
+  <title>Fundo técnico 01: grid e marcadores</title>
+  <rect width="1920" height="1080" fill="#F4F3EF"/>
+  <path d="M96.5 0V1080M217.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M242.5 0V1080M363.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M388.5 0V1080M509.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M534.5 0V1080M655.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M680.5 0V1080M801.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M826.5 0V1080M947.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M972.5 0V1080M1093.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1118.5 0V1080M1239.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1264.5 0V1080M1385.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1410.5 0V1080M1531.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1556.5 0V1080M1677.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1702.5 0V1080M1823.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M0 96.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 192.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 288.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 384.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 480.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 576.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 672.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 768.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 864.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 960.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M0 1056.5H1920" stroke="#D6D3CB" stroke-width="1" stroke-opacity="0.5"/>
+  <path d="M388 183.5V200.5M379.5 192H396.5" stroke="#5F6168" stroke-width="1"/>
+  <path d="M1240 183.5V200.5M1231.5 192H1248.5" stroke="#5F6168" stroke-width="1"/>
+  <path d="M388 759.5V776.5M379.5 768H396.5" stroke="#5F6168" stroke-width="1"/>
+  <path d="M1240 759.5V776.5M1231.5 768H1248.5" stroke="#5F6168" stroke-width="1"/>
+  <rect x="1411" y="673" width="120" height="96" fill="none" stroke="#17181A" stroke-width="2"/>
+  <path d="M388 864V876M1240 864V876M388 870H1240" stroke="#5F6168" stroke-width="1"/>
+</svg>

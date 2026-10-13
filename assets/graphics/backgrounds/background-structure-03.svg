@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" role="img" aria-label="Fundo técnico 03: fluxo modular">
+  <title>Fundo técnico 03: fluxo modular</title>
+  <rect width="1920" height="1080" fill="#F4F3EF"/>
+  <path d="M96.5 0V1080M217.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M242.5 0V1080M363.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M388.5 0V1080M509.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M534.5 0V1080M655.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M680.5 0V1080M801.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M826.5 0V1080M947.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M972.5 0V1080M1093.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1118.5 0V1080M1239.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1264.5 0V1080M1385.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1410.5 0V1080M1531.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1556.5 0V1080M1677.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M1702.5 0V1080M1823.5 0V1080" stroke="#D6D3CB" stroke-width="1"/>
+  <path d="M364 224.5H388" stroke="#5F6168" stroke-width="1"/>
+  <path d="M656 224.5H680" stroke="#5F6168" stroke-width="1"/>
+  <path d="M814.5 256V480" stroke="#5F6168" stroke-width="1"/>
+  <path d="M948 512.5H972" stroke="#5F6168" stroke-width="1"/>
+  <path d="M1240 512.5H1264" stroke="#5F6168" stroke-width="1"/>
+  <path d="M1398.5 544V768" stroke="#5F6168" stroke-width="1"/>
+  <path d="M1532 800.5H1556" stroke="#5F6168" stroke-width="1"/>
+  <rect x="96.5" y="192.5" width="267" height="63" fill="#F4F3EF" stroke="#5F6168" stroke-width="1"/>
+  <rect x="388.5" y="192.5" width="267" height="63" fill="#F4F3EF" stroke="#5F6168" stroke-width="1"/>
+  <rect x="681" y="193" width="266" height="62" fill="#FF5A1F" fill-opacity="0.12" stroke="#FF5A1F" stroke-width="2"/>
+  <rect x="680.5" y="480.5" width="267" height="63" fill="#F4F3EF" stroke="#5F6168" stroke-width="1"/>
+  <rect x="972.5" y="480.5" width="267" height="63" fill="#F4F3EF" stroke="#5F6168" stroke-width="1"/>
+  <rect x="1264.5" y="480.5" width="267" height="63" fill="#F4F3EF" stroke="#5F6168" stroke-width="1"/>
+  <rect x="1264.5" y="768.5" width="267" height="63" fill="#F4F3EF" stroke="#5F6168" stroke-width="1"/>
+  <rect x="1556.5" y="768.5" width="267" height="63" fill="#F4F3EF" stroke="#5F6168" stroke-width="1"/>
+</svg>
