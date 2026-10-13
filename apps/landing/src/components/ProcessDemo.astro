@@ -1,0 +1,1053 @@
+---
+// S5 · 02 / Do processo ao sistema (RF-LP-04). Spec: specs/features/process-demo/.
+// Sem JavaScript: as 4 fases e as 4 cenas aparecem empilhadas. O script acrescenta
+// os papéis de aba, o teclado, o avanço de 6 s e o botão de controle.
+const phases = [
+  {
+    title: 'Diagnóstico',
+    text: 'Acompanhar o processo de ponta a ponta e encontrar onde ele trava. Gratuito.',
+    file: 'diagnostico.md',
+  },
+  {
+    title: 'Decisão',
+    text: 'Comparar as opções com franqueza. Às vezes, a resposta é uma ferramenta pronta.',
+    file: 'decisao.md',
+  },
+  {
+    title: 'Escopo',
+    text: 'O que entra, o que não entra, prazo e critérios de entrega, por escrito.',
+    file: 'escopo.pdf',
+  },
+  {
+    title: 'Sistema',
+    text: 'Construído em ciclos curtos, entregue documentado e com o código no nome da empresa.',
+    file: 'sistema / pedidos',
+  },
+];
+---
+
+<section class="bench" aria-labelledby="t-demo">
+  <div class="frame">
+    <div class="inner">
+      <div class="sec-head reveal">
+        <p class="idx">
+          <b>02</b> / Do processo ao sistema
+        </p>
+        <h2 class="h2" id="t-demo">
+          Primeiro o problema. Depois o código.
+        </h2>
+        <p>
+          Como a Zarco transforma uma operação que depende de planilha em um sistema feito para ela.
+        </p>
+      </div>
+
+      <div class="demo reveal" id="demo" style="--dur:6s">
+        <div class="demo__side">
+          <div class="phases" aria-label="Fases do método">
+            {phases.map((phase, i) => (
+              <div class="phase" id={`p${i + 1}`} data-scene={`s${i + 1}`}>
+                <span class="bar" />
+                <span class="idx">Fase {String(i + 1).padStart(2, '0')}</span>
+                <strong>{phase.title}</strong>
+                <p>
+                  <span>{phase.text}</span>
+                </p>
+              </div>
+            ))}
+          </div>
+          <div class="demo__ctrl">
+            <button class="ctrl" type="button" id="play" aria-label="Pausar a demonstração" hidden>
+              <svg aria-hidden="true">
+                <use href="#i-pause"></use>
+              </svg>
+              <span>Pausar</span>
+            </button>
+          </div>
+        </div>
+
+        <figure class="window">
+          <div class="window__bar">
+            <i></i>
+            <i></i>
+            <i></i>
+            <span class="window__file idx" id="file">
+              {phases[0]?.file}
+            </span>
+            <span class="window__seal idx">Ilustração do método</span>
+          </div>
+          <div class="stage">
+            <div class="scene is-on" id="s1" data-file={phases[0]?.file}>
+              <div class="map">
+                <span class="tile">
+                  Pedido<small>WhatsApp</small>
+                </span>
+                <span class="arr"></span>
+                <span class="tile">
+                  Cadastro<small>Planilha</small>
+                </span>
+                <span class="arr"></span>
+                <span class="tile hot">
+                  Conferência<small>Gargalo · manual</small>
+                </span>
+                <span class="arr"></span>
+                <span class="tile">
+                  Separação<small>Estoque</small>
+                </span>
+                <span class="arr"></span>
+                <span class="tile">
+                  Entrega<small>Rota</small>
+                </span>
+              </div>
+              <p class="map-note">
+                O pedido é redigitado em duas etapas e conferido à mão antes da separação. É aqui
+                que o processo trava.
+              </p>
+            </div>
+            <div class="scene" id="s2" data-file={phases[1]?.file}>
+              <div class="opts">
+                <div class="opt tile">
+                  <span class="r"></span>
+                  <strong>Ferramenta pronta</strong>
+                  <span>Resolve o cadastro, mas não a conferência.</span>
+                </div>
+                <div class="opt tile">
+                  <span class="r"></span>
+                  <strong>Mudança de processo</strong>
+                  <span>Ajuda, mas a redigitação continua.</span>
+                </div>
+                <div class="opt tile pick">
+                  <span class="r"></span>
+                  <strong>Sistema sob medida · recomendado</strong>
+                  <span>O pedido entra uma vez e segue até a entrega.</span>
+                </div>
+              </div>
+            </div>
+            <div class="scene" id="s3" data-file={phases[2]?.file}>
+              <div class="doc tile">
+                <h4>Incluído</h4>
+                <div class="row">
+                  <span class="ck"></span>Entrada única do pedido
+                </div>
+                <div class="row">
+                  <span class="ck"></span>Conferência automática
+                </div>
+                <div class="row">
+                  <span class="ck"></span>Painel de acompanhamento
+                </div>
+                <h4 class="sub">Não incluído</h4>
+                <div class="row out">
+                  <span class="ck"></span>Aplicativo para celular
+                </div>
+              </div>
+            </div>
+            <div class="scene" id="s4" data-file={phases[3]?.file}>
+              <div>
+                <div class="app tile">
+                  <div class="app__top">
+                    <strong>Pedidos</strong>
+                    <span class="chip on">Hoje</span>
+                    <span class="chip">Semana</span>
+                  </div>
+                  <div class="app__row">
+                    <span class="id">#1042</span>
+                    <span>Mercado Central</span>
+                    <span class="st now">Conferindo</span>
+                  </div>
+                  <div class="app__row">
+                    <span class="id">#1041</span>
+                    <span>Padaria Aurora</span>
+                    <span class="st ok">Separado</span>
+                  </div>
+                  <div class="app__row">
+                    <span class="id">#1040</span>
+                    <span>Hortifruti Sol</span>
+                    <span class="st ok">Entregue</span>
+                  </div>
+                  <div class="app__row">
+                    <span class="id">#1039</span>
+                    <span>Café da Praça</span>
+                    <span class="st ok">Entregue</span>
+                  </div>
+                </div>
+                <div class="badges">
+                  <span>Em produção</span>
+                  <span>Documentado</span>
+                  <span>Código no seu nome</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption class="window__foot">
+            <span class="idx">Ilustração do método. Não representa um cliente.</span>
+            <span class="idx" id="phase-n">
+              01 / 04
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bench {
+    position: relative;
+    z-index: 1;
+    background: var(--color-bench);
+    color: var(--color-text);
+    border-block: 1px solid var(--color-line);
+  }
+  /* Grade de pontos a 6% */
+  .bench::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgb(237 235 230 / 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .bench .frame > div {
+    border-inline: 1px solid var(--color-line);
+  }
+  .bench .inner {
+    padding-top: 96px;
+    padding-bottom: 112px;
+  }
+  @media (min-width: 960px) {
+    .bench .inner {
+      padding-top: 128px;
+      padding-bottom: 144px;
+    }
+  }
+  @media (max-width: 639px) {
+    .bench .inner {
+      padding-top: 72px;
+      padding-bottom: 88px;
+    }
+  }
+  /* minmax(0, …): sem isso a trilha cresce até a largura mínima das abas roláveis
+     e a janela vaza para fora da tela no celular */
+  .demo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .demo__side,
+  .window {
+    min-width: 0;
+  }
+  @media (min-width: 960px) {
+    .demo {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      gap: 48px;
+      align-items: start;
+    }
+  }
+  /* R1: no celular e no tablet, a janela vem antes das fases */
+  @media (max-width: 959px) {
+    .window {
+      order: 1;
+    }
+    .demo__side {
+      order: 2;
+      position: relative;
+    }
+    /* R4: indício de rolagem lateral nas abas */
+    .demo__side::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 76px;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, var(--color-bench));
+    }
+  }
+
+  /* ---------- Fases ---------- */
+  .phases {
+    display: grid;
+    border-top: 1px solid var(--color-bench-line);
+  }
+  @media (max-width: 959px) {
+    .phases {
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(150px, 1fr);
+      overflow-x: auto;
+      border-top: 0;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+    }
+    .phases::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .phase {
+    position: relative;
+    display: grid;
+    gap: 6px;
+    padding: 20px 16px 20px 20px;
+    border-bottom: 1px solid var(--color-bench-line);
+  }
+  .phase[role='tab'] {
+    cursor: pointer;
+  }
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-bench-line);
+  }
+  .bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 0;
+    background: var(--color-accent);
+  }
+  .phase[aria-selected='true'] .bar {
+    animation: fill-v var(--dur, 6s) linear forwards;
+  }
+  .demo.is-paused .phase[aria-selected='true'] .bar {
+    animation-play-state: paused;
+  }
+  .demo.is-manual .phase[aria-selected='true'] .bar {
+    animation: none;
+    height: 100%;
+  }
+  .phase .idx {
+    color: var(--color-text-2);
+  }
+  .phase[aria-selected='true'] .idx {
+    color: var(--color-accent);
+  }
+  .phase strong {
+    font: 600 22px/1.1 var(--font-display);
+    letter-spacing: -0.02em;
+    color: var(--color-text-2);
+    transition: color 0.25s;
+  }
+  .phase[aria-selected='true'] strong {
+    color: var(--color-text);
+  }
+  .phase p {
+    display: grid;
+    grid-template-rows: 0fr;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--color-text-2);
+    transition: grid-template-rows 0.4s var(--ease-standard);
+  }
+  .phase p > span {
+    overflow: hidden;
+  }
+  .phase[aria-selected='true'] p {
+    grid-template-rows: 1fr;
+  }
+  .phase:focus-visible {
+    outline-offset: -2px;
+  }
+  @keyframes fill-v {
+    from {
+      height: 0;
+    }
+    to {
+      height: 100%;
+    }
+  }
+  @keyframes fill-h {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  @media (max-width: 959px) {
+    .phase {
+      padding: 16px 14px 14px;
+      border-bottom: 0;
+      border-top: 1px solid var(--color-bench-line);
+      scroll-snap-align: start;
+    }
+    .phase::before {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: auto;
+      width: auto;
+      height: 2px;
+    }
+    .bar {
+      top: 0;
+      height: 2px;
+      width: 0;
+    }
+    .phase[aria-selected='true'] .bar {
+      animation-name: fill-h;
+    }
+    .demo.is-manual .phase[aria-selected='true'] .bar {
+      width: 100%;
+      height: 2px;
+    }
+    .phase p {
+      display: none;
+    }
+    .phase strong {
+      font-size: 18px;
+    }
+  }
+
+  /* Controle (tecla) */
+  .demo__ctrl {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 20px;
+  }
+  .ctrl {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 12px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font: 500 12px/1 var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-2);
+    background:
+      linear-gradient(180deg, #26272c, #1a1b1e) padding-box,
+      linear-gradient(
+          180deg,
+          var(--color-edge-hi),
+          rgb(255 255 255 / 0.03) 50%,
+          var(--color-edge-lo)
+        )
+        border-box;
+    box-shadow:
+      0 1px 2px var(--color-shade),
+      inset 0 1px 0 rgb(255 255 255 / 0.06);
+  }
+  .ctrl[hidden] {
+    display: none;
+  }
+  .ctrl:hover {
+    color: var(--color-text);
+  }
+  .ctrl:active {
+    background:
+      linear-gradient(180deg, #141518, #1c1d21) padding-box,
+      linear-gradient(180deg, var(--color-edge-lo), rgb(255 255 255 / 0.08)) border-box;
+    box-shadow: inset 0 2px 5px rgb(0 0 0 / 0.6);
+  }
+  .ctrl svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* ---------- Janela (painel em relevo) ---------- */
+  .window {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background:
+      linear-gradient(180deg, #1b1c20, #141518) padding-box,
+      linear-gradient(
+          180deg,
+          rgb(255 255 255 / 0.16),
+          rgb(255 255 255 / 0.03) 30%,
+          rgb(0 0 0 / 0.7)
+        )
+        border-box;
+    box-shadow:
+      0 2px 4px var(--color-shade),
+      0 40px 90px -40px rgb(0 0 0 / 0.95),
+      inset 0 1px 0 rgb(255 255 255 / 0.07);
+  }
+  .window__bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 14px;
+    border-bottom: 1px solid rgb(0 0 0 / 0.5);
+    background: linear-gradient(180deg, #25262b, #1d1e22);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      0 1px 0 rgb(255 255 255 / 0.03);
+  }
+  /* "Luzes" escavadas */
+  .window__bar i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #121316;
+    box-shadow:
+      inset 0 1px 2px rgb(0 0 0 / 0.8),
+      0 1px 0 rgb(255 255 255 / 0.06);
+  }
+  .window__file {
+    margin-left: 6px;
+    color: var(--color-text);
+  }
+  .window__seal {
+    margin-left: auto;
+    color: var(--color-text-2);
+  }
+  @media (max-width: 639px) {
+    .window__seal {
+      display: none;
+    }
+  }
+  .stage {
+    position: relative;
+    height: 380px;
+    background: radial-gradient(600px 300px at 50% 0%, rgb(255 255 255 / 0.025), transparent 70%);
+  }
+  @media (max-width: 639px) {
+    .stage {
+      height: 420px;
+    }
+  }
+  .scene {
+    position: absolute;
+    inset: 0;
+    padding: 28px;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition:
+      opacity 0.4s var(--ease-standard),
+      transform 0.4s var(--ease-standard),
+      visibility 0.4s;
+  }
+  .scene.is-on {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .window__foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    border-top: 1px solid var(--color-bench-line);
+    background: rgb(0 0 0 / 0.18);
+  }
+  .window__foot .idx {
+    color: var(--color-text-2);
+  }
+
+  /* Peças internas: superfícies levemente elevadas */
+  .tile {
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: 6px;
+    background: linear-gradient(180deg, #24252a, #1e1f23);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.05),
+      0 1px 2px rgb(0 0 0 / 0.4);
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Cena 1: mapa do processo */
+  .map {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px 8px;
+    max-width: 520px;
+  }
+  .map .tile {
+    padding: 10px 12px;
+    font-size: 13.5px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .map .tile small {
+    display: block;
+    margin-top: 4px;
+    font: 500 10.5px/1.3 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-2);
+  }
+  .arr {
+    position: relative;
+    width: 18px;
+    height: 1px;
+    background: var(--color-text-2);
+  }
+  .arr::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: -3px;
+    border: 3.5px solid transparent;
+    border-left: 5px solid var(--color-text-2);
+    border-right: 0;
+  }
+  .map .hot {
+    border: 1px dashed var(--color-danger);
+    color: var(--color-danger);
+  }
+  .map .hot small {
+    color: var(--color-danger);
+  }
+  .scene.is-on .map .hot {
+    animation: hot 1.8s ease-in-out infinite;
+  }
+  @keyframes hot {
+    50% {
+      background: rgb(249 112 102 / 0.12);
+    }
+  }
+  .map-note {
+    margin-top: 24px;
+    max-width: 420px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--color-text-2);
+  }
+
+  /* Cena 2: decisão */
+  .opts {
+    display: grid;
+    gap: 8px;
+    width: min(100%, 440px);
+  }
+  .opt {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 2px 12px;
+    padding: 12px 14px;
+  }
+  .opt .r {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-text-2);
+  }
+  .opt strong {
+    font-weight: 500;
+    font-size: 14.5px;
+  }
+  .opt > span:last-child {
+    grid-column: 2;
+    font-size: 13px;
+    color: var(--color-text-2);
+  }
+  .opt.pick {
+    border-color: var(--color-accent);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.05),
+      0 0 0 1px rgb(255 90 31 / 0.25);
+  }
+  .opt.pick .r {
+    border-color: var(--color-accent);
+    background: radial-gradient(var(--color-accent) 0 3.5px, transparent 4px);
+  }
+  .scene.is-on .opt {
+    animation: rise 0.45s var(--ease-standard) both;
+  }
+  .scene.is-on .opt:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+  .scene.is-on .opt:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+
+  /* Cena 3: escopo */
+  .doc {
+    width: min(100%, 440px);
+    padding: 18px 20px;
+  }
+  .doc h4 {
+    margin: 0 0 4px;
+    font: 500 11px var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-2);
+  }
+  .doc .sub {
+    margin-top: 12px;
+  }
+  .doc .row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--color-bench-line);
+    font-size: 14px;
+  }
+  .doc .row:last-child {
+    border-bottom: 0;
+  }
+  .ck {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 4px;
+    background: var(--color-text);
+  }
+  .ck::after {
+    content: '';
+    width: 7px;
+    height: 3.5px;
+    border-left: 1.6px solid var(--color-bench);
+    border-bottom: 1.6px solid var(--color-bench);
+    rotate: -45deg;
+    translate: 0 -1px;
+  }
+  .doc .out {
+    color: var(--color-text-2);
+  }
+  .doc .out .ck {
+    background: none;
+    border: 1.5px dashed var(--color-text-2);
+  }
+  .doc .out .ck::after {
+    display: none;
+  }
+  .scene.is-on .doc .row {
+    animation: rise 0.4s var(--ease-standard) both;
+  }
+  .scene.is-on .doc .row:nth-of-type(2) {
+    animation-delay: 0.06s;
+  }
+  .scene.is-on .doc .row:nth-of-type(3) {
+    animation-delay: 0.12s;
+  }
+  .scene.is-on .doc .row:nth-of-type(4) {
+    animation-delay: 0.18s;
+  }
+  .scene.is-on .doc .row:nth-of-type(5) {
+    animation-delay: 0.24s;
+  }
+
+  /* Cena 4: sistema */
+  .app {
+    width: min(100%, 500px);
+    overflow: hidden;
+  }
+  .app__top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--color-bench-line);
+  }
+  .app__top strong {
+    margin-right: auto;
+    font: 600 15px var(--font-display);
+  }
+  .chip {
+    padding: 5px 9px;
+    border: 1px solid var(--color-bench-line-2);
+    border-radius: 999px;
+    font: 500 11px/1 var(--font-sans);
+    color: var(--color-text-2);
+  }
+  .chip.on {
+    background: rgb(237 235 230 / 0.1);
+    color: var(--color-text);
+  }
+  .app__row {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-bench-line);
+    font-size: 13.5px;
+  }
+  .app__row:last-child {
+    border-bottom: 0;
+  }
+  .app__row .id {
+    font: 500 11.5px var(--font-mono);
+    color: var(--color-text-2);
+  }
+  .st {
+    padding: 5px 8px;
+    border-radius: 4px;
+    font: 500 11px/1 var(--font-sans);
+    background: rgb(237 235 230 / 0.08);
+    color: var(--color-text-2);
+  }
+  .st.ok {
+    background: rgb(237 235 230 / 0.14);
+    color: var(--color-text);
+  }
+  .st.now {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .scene.is-on .app__row {
+    animation: rise 0.4s var(--ease-standard) both;
+  }
+  .scene.is-on .app__row:nth-child(3) {
+    animation-delay: 0.1s;
+  }
+  .scene.is-on .app__row:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+  .scene.is-on .app__row:nth-child(5) {
+    animation-delay: 0.3s;
+  }
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .badges span {
+    padding: 7px 10px;
+    border: 1px solid var(--color-bench-line-2);
+    border-radius: 999px;
+    font: 500 11px/1 var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+  .scene.is-on .badges {
+    animation: rise 0.5s 0.5s var(--ease-standard) both;
+  }
+
+  /* R3: janela mais compacta em telas estreitas */
+  @media (max-width: 400px) {
+    .scene {
+      padding: 16px;
+    }
+    .app__row {
+      grid-template-columns: 50px 1fr auto;
+      gap: 8px;
+      padding: 9px 10px;
+      font-size: 13px;
+    }
+    .app__top {
+      padding: 10px;
+    }
+    .map .tile {
+      padding: 8px 9px;
+      font-size: 12.5px;
+    }
+    .arr {
+      width: 12px;
+    }
+    .doc {
+      padding: 14px;
+    }
+  }
+
+  /* ---------- Sem JavaScript: fases com a descrição aberta e as cenas empilhadas (B4) ---------- */
+  :global(html:not(.js)) .scene {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    border-bottom: 1px solid var(--color-bench-line);
+  }
+  :global(html:not(.js)) .stage {
+    height: auto;
+  }
+  :global(html:not(.js)) .phases {
+    grid-auto-flow: row;
+    overflow: visible;
+  }
+  :global(html:not(.js)) .phase p {
+    display: grid;
+    grid-template-rows: 1fr;
+  }
+  :global(html:not(.js)) .demo__side::after {
+    display: none;
+  }
+
+  /* ---------- Movimento reduzido: nada anima; as cenas só trocam ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .scene {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  import { onView, prefersReducedMotion } from '../scripts/in-view';
+
+  const DURATION_MS = 6000;
+
+  const demo = document.getElementById('demo');
+  const phasesEl = demo?.querySelector<HTMLElement>('.phases');
+  const tabs = Array.from(demo?.querySelectorAll<HTMLElement>('.phase') ?? []);
+  const scenes = Array.from(demo?.querySelectorAll<HTMLElement>('.scene') ?? []);
+  const fileEl = document.getElementById('file');
+  const counterEl = document.getElementById('phase-n');
+  const control = document.getElementById('play') as HTMLButtonElement | null;
+
+  if (demo && phasesEl && control && fileEl && counterEl && tabs.length === scenes.length) {
+    const reduced = prefersReducedMotion();
+    const last = tabs.length - 1;
+
+    let current = 0;
+    let playing = !reduced;
+    let visible = false;
+    let hovering = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    // Papéis ARIA só existem quando há JavaScript (spec §4)
+    phasesEl.setAttribute('role', 'tablist');
+    tabs.forEach((tab, i) => {
+      const scene = scenes[i]!;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', scene.id);
+      scene.setAttribute('role', 'tabpanel');
+      scene.setAttribute('aria-labelledby', tab.id);
+    });
+    control.hidden = false;
+
+    // Reinicia uma animação CSS (barra de progresso e entradas da cena)
+    const restart = (el: HTMLElement) => {
+      el.style.animation = 'none';
+      void el.offsetHeight;
+      el.style.animation = '';
+    };
+
+    const renderControl = () => {
+      const atEnd = !playing && current === last;
+      const label = playing ? 'Pausar' : atEnd ? 'Rever' : 'Reproduzir';
+      const icon = playing ? '#i-pause' : atEnd ? '#i-replay' : '#i-play';
+      control.querySelector('use')?.setAttribute('href', icon);
+      const text = control.querySelector('span');
+      if (text) text.textContent = label;
+      control.setAttribute('aria-label', `${label} a demonstração`);
+    };
+
+    const schedule = () => {
+      clearTimeout(timer);
+      const running = playing && visible && !hovering;
+      demo.classList.toggle('is-paused', !running);
+      if (!running) return;
+      timer = setTimeout(() => {
+        if (current === last) stop();
+        else show(current + 1);
+      }, DURATION_MS);
+    };
+
+    // Interrompe o avanço automático; a barra da fase ativa fica cheia
+    const stop = () => {
+      playing = false;
+      demo.classList.add('is-manual');
+      renderControl();
+      schedule();
+    };
+
+    const show = (index: number, focus = false) => {
+      current = (index + tabs.length) % tabs.length;
+      tabs.forEach((tab, i) => {
+        const selected = i === current;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        const bar = tab.querySelector<HTMLElement>('.bar');
+        if (bar) restart(bar);
+      });
+      scenes.forEach((scene, i) => {
+        const on = i === current;
+        scene.classList.toggle('is-on', on);
+        if (on) scene.querySelectorAll<HTMLElement>('*').forEach(restart);
+      });
+      fileEl.textContent = scenes[current]!.dataset.file ?? '';
+      counterEl.textContent = `0${current + 1} / 0${tabs.length}`;
+      if (focus) {
+        tabs[current]!.focus();
+        tabs[current]!.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      }
+      renderControl();
+      schedule();
+    };
+
+    const choose = (index: number, focus = false) => {
+      playing = false;
+      demo.classList.add('is-manual');
+      show(index, focus);
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => choose(i));
+      tab.addEventListener('keydown', (event) => {
+        const target = {
+          ArrowRight: current + 1,
+          ArrowDown: current + 1,
+          ArrowLeft: current - 1,
+          ArrowUp: current - 1,
+          Home: 0,
+          End: last,
+        }[event.key];
+        if (target !== undefined) {
+          event.preventDefault();
+          choose(target, true);
+        } else if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          choose(i);
+        }
+      });
+    });
+
+    control.addEventListener('click', () => {
+      if (!playing && current === last) {
+        playing = true;
+        demo.classList.remove('is-manual');
+        show(0);
+      } else {
+        playing = !playing;
+        demo.classList.remove('is-manual');
+        renderControl();
+        schedule();
+      }
+    });
+
+    demo.addEventListener('mouseenter', () => {
+      hovering = true;
+      schedule();
+    });
+    demo.addEventListener('mouseleave', () => {
+      hovering = false;
+      if (playing) show(current);
+    });
+
+    onView(
+      demo,
+      () => ((visible = true), schedule()),
+      () => ((visible = false), schedule()),
+      { threshold: 0.35 },
+    );
+
+    if (reduced) demo.classList.add('is-manual');
+    show(0);
+  }
+</script>

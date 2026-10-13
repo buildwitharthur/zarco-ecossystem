@@ -1,0 +1,196 @@
+---
+import { contact } from '../config/contact';
+
+interface Props {
+  /** primary: botão laranja · ink: grafite sobre o laranja · phone: número em texto · link: texto simples */
+  variant?: 'primary' | 'ink' | 'phone' | 'link';
+  size?: 'md' | 'sm';
+  id?: string;
+  class?: string;
+  /** Texto do link nas variantes "phone" e "link". */
+  text?: string;
+  tabindex?: number;
+}
+
+const { variant = 'primary', size = 'md', id, class: className, text, tabindex } = Astro.props;
+const isButton = variant === 'primary' || variant === 'ink';
+const classes = [
+  isButton && 'btn',
+  variant === 'ink' && 'btn--ink',
+  isButton && size === 'sm' && 'btn--sm',
+  variant === 'phone' && 'phone',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<a id={id} class={classes} href={contact.href} target="_blank" rel="noopener" tabindex={tabindex}>
+  {isButton ? (
+    <>
+      <svg aria-hidden="true">
+        <use href="#i-chat" />
+      </svg>
+      {contact.label}
+      <span class="sr-only">{contact.accessibleSuffix}</span>
+    </>
+  ) : (
+    (text ?? contact.phone)
+  )}
+</a>
+
+<style is:global>
+  /* Botão-assinatura: plástico macio, o quadrado do canto é o módulo do Z (foundations §7.1) */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 24px 0 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--color-on-accent);
+    font: 600 16px/1 var(--font-sans);
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgb(255 190 160 / 0.45);
+    background:
+      linear-gradient(180deg, #ff7a47, #ff5a1f 55%, #ef4f18) padding-box,
+      linear-gradient(
+          180deg,
+          rgb(255 214 196 / 0.9),
+          rgb(255 140 100 / 0.35) 45%,
+          rgb(120 35 5 / 0.7)
+        )
+        border-box;
+    box-shadow:
+      0 1px 1px rgb(0 0 0 / 0.35),
+      0 10px 22px -10px rgb(255 90 31 / 0.35),
+      inset 0 1px 0 rgb(255 255 255 / 0.4),
+      inset 0 -1px 0 rgb(120 35 5 / 0.35);
+    transition:
+      box-shadow 0.2s var(--ease-standard),
+      transform 0.2s var(--ease-standard);
+  }
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 6px;
+    height: 6px;
+    background: var(--color-on-accent);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
+    transition: transform 0.25s var(--ease-standard);
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+    background:
+      linear-gradient(180deg, #ff8455, #ff6127 55%, #f2541c) padding-box,
+      linear-gradient(
+          180deg,
+          rgb(255 214 196 / 0.9),
+          rgb(255 140 100 / 0.35) 45%,
+          rgb(120 35 5 / 0.7)
+        )
+        border-box;
+  }
+  .btn:hover::after {
+    transform: translate(-4px, 4px);
+  }
+  .btn:active {
+    transform: translateY(1px);
+    background:
+      linear-gradient(180deg, #e94c15, #ff5a1f 55%, #ff6a35) padding-box,
+      linear-gradient(180deg, rgb(120 35 5 / 0.7), rgb(255 190 160 / 0.6)) border-box;
+    box-shadow:
+      inset 0 3px 7px rgb(110 30 5 / 0.45),
+      inset 0 -1px 0 rgb(255 255 255 / 0.25);
+  }
+  .btn svg {
+    width: 20px;
+    height: 20px;
+    flex: none;
+  }
+  .btn:focus-visible {
+    outline-offset: 3px;
+  }
+
+  .btn--sm {
+    height: 40px;
+    font-size: 14px;
+    padding: 0 18px 0 14px;
+    gap: 8px;
+  }
+  .btn--sm svg {
+    width: 18px;
+    height: 18px;
+  }
+  .btn--sm::after {
+    top: 5px;
+    right: 5px;
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Metal escuro, sobre o bloco laranja */
+  .btn--ink {
+    color: var(--color-text);
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 0.5);
+    background:
+      linear-gradient(180deg, #2a2b30, #17181a 60%, #101113) padding-box,
+      linear-gradient(180deg, rgb(255 255 255 / 0.2), rgb(255 255 255 / 0.04) 45%, rgb(0 0 0 / 0.6))
+        border-box;
+    box-shadow:
+      0 1px 1px rgb(80 25 5 / 0.35),
+      0 12px 24px -12px rgb(80 25 5 / 0.55),
+      inset 0 1px 0 rgb(255 255 255 / 0.1);
+  }
+  .btn--ink::after {
+    background: var(--color-accent);
+  }
+  .btn--ink:hover {
+    background:
+      linear-gradient(180deg, #34353b, #1d1e21 60%, #131416) padding-box,
+      linear-gradient(
+          180deg,
+          rgb(255 255 255 / 0.22),
+          rgb(255 255 255 / 0.05) 45%,
+          rgb(0 0 0 / 0.6)
+        )
+        border-box;
+  }
+  .btn--ink:active {
+    background:
+      linear-gradient(180deg, #0f1012, #17181a 55%, #222328) padding-box,
+      linear-gradient(180deg, rgb(0 0 0 / 0.6), rgb(255 255 255 / 0.14)) border-box;
+    box-shadow: inset 0 3px 7px rgb(0 0 0 / 0.6);
+  }
+
+  .phone {
+    font: 500 14px/1.4 var(--font-mono);
+    letter-spacing: 0.02em;
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-line-2);
+    padding-bottom: 2px;
+  }
+  .phone:hover {
+    border-color: var(--color-text);
+  }
+
+  @media (hover: none) {
+    .btn:hover {
+      transform: none;
+    }
+    .btn:hover::after {
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn:hover {
+      transform: none;
+    }
+  }
+</style>

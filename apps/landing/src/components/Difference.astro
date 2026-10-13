@@ -1,0 +1,220 @@
+---
+// S6 · 03 / A diferença (RF-LP-05): só o que a Zarco já pratica (RN-LP-01, RN-LP-02).
+const common = [
+  'Preço definido a partir de uma lista de telas.',
+  'Escopo vago, com surpresas no meio do projeto.',
+  'Código e acessos presos a quem desenvolveu.',
+];
+const zarco = [
+  'Proposta feita depois de entender o processo, com diagnóstico gratuito.',
+  'Escopo por escrito, com o que está e o que não está incluído.',
+  'Código, infraestrutura e documentação no nome da sua empresa.',
+];
+const points = [
+  {
+    title: 'A solução mais simples que resolve.',
+    text: 'Toda proposta explica por que a arquitetura escolhida é a mais simples para o caso.',
+  },
+  {
+    title: 'Acompanhamento de perto.',
+    text: 'O engenheiro que faz o diagnóstico acompanha o projeto até a entrega.',
+  },
+  {
+    title: 'O sistema é seu.',
+    text: 'Sem dependência: você recebe o código, os acessos e a documentação.',
+  },
+];
+---
+
+<section class="sec" aria-labelledby="t-dif">
+  <div class="frame">
+    <div class="inner">
+      <div class="sec-head reveal">
+        <p class="idx">
+          <b>03</b> / A diferença
+        </p>
+        <h2 class="h2" id="t-dif">
+          Entender antes de orçar.
+        </h2>
+        <p>
+          Um sistema feito sem entender o processo vira mais uma ferramenta que a equipe contorna.
+        </p>
+      </div>
+      <div class="compare reveal">
+        <div class="side side--old">
+          <p class="idx">Caminho comum</p>
+          <h3>Orçamento antes de entender.</h3>
+          <ul>
+            {common.map((text) => (
+              <li>{text}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="side side--new" id="resolve">
+          <p class="idx">
+            <span class="mark"></span>
+            <b>Zarco</b>
+          </p>
+          <h3>Diagnóstico antes do orçamento.</h3>
+          <ul>
+            {zarco.map((text, i) => (
+              <li style={`--i:${i}`}>{text}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <ol class="points reveal">
+        {points.map((point, i) => (
+          <li>
+            <span class="idx">
+              <b>{String(i + 1).padStart(2, '0')}</b>
+            </span>
+            <h3 class="h3">{point.title}</h3>
+            <p>{point.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .compare {
+    display: grid;
+    border: 1px solid var(--color-line-2);
+  }
+  @media (min-width: 900px) {
+    .compare {
+      grid-template-columns: 1fr 1fr;
+    }
+    .compare > :first-child {
+      border-right: 1px solid var(--color-line-2);
+    }
+  }
+  .side {
+    padding: 32px 28px;
+    display: grid;
+    gap: 22px;
+    align-content: start;
+  }
+  @media (min-width: 960px) {
+    .side {
+      padding: 40px;
+    }
+  }
+  @media (max-width: 639px) {
+    .side {
+      padding: 22px;
+    }
+  }
+  .side + .side {
+    border-top: 1px solid var(--color-line-2);
+  }
+  @media (min-width: 900px) {
+    .side + .side {
+      border-top: 0;
+    }
+  }
+  .side--old {
+    background: var(--color-bg);
+  }
+  .side--new {
+    background: var(--color-surface);
+  }
+  .side h3 {
+    font: 600 26px/1.1 var(--font-display);
+    letter-spacing: -0.025em;
+  }
+  .side--old h3 {
+    color: var(--color-text-2);
+  }
+  .side li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-line);
+    font-size: 15.5px;
+    line-height: 1.5;
+  }
+  .side--old li {
+    color: var(--color-text-2);
+  }
+  .side li::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin-top: 4px;
+    border-radius: 3px;
+    border: 1.5px dashed var(--color-line-2);
+  }
+  .side--new li::before {
+    border: 1.5px dashed var(--color-text-3);
+    transition:
+      border-color 0.3s,
+      background 0.3s;
+  }
+  /* Os marcadores da Zarco "se resolvem": tracejado → sólido ao entrar na tela */
+  .side--new.is-resolved li::before {
+    border-style: solid;
+    border-color: var(--color-text);
+    background: var(--color-text);
+    transition-delay: calc(var(--i) * 160ms + 200ms);
+  }
+  :global(html:not(.js)) .side--new li::before {
+    border-style: solid;
+    border-color: var(--color-text);
+    background: var(--color-text);
+  }
+  .mark {
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    margin-right: 10px;
+    vertical-align: middle;
+    background: var(--color-accent);
+  }
+
+  .points {
+    display: grid;
+    margin-top: 40px;
+    border-top: 1px solid var(--color-line-2);
+  }
+  @media (min-width: 900px) {
+    .points {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .points > li + li {
+      border-left: 1px solid var(--color-line);
+    }
+  }
+  .points > li {
+    padding: 24px 24px 8px 0;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+  @media (min-width: 900px) {
+    .points > li {
+      padding: 28px 28px 8px;
+    }
+    .points > li:first-child {
+      padding-left: 0;
+    }
+  }
+  .points p {
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--color-text-2);
+  }
+</style>
+
+<script>
+  import { onView } from '../scripts/in-view';
+
+  const resolve = document.getElementById('resolve');
+  if (resolve)
+    onView(resolve, (entry) => entry.target.classList.add('is-resolved'), undefined, {
+      threshold: 0.4,
+    });
+</script>

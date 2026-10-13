@@ -25,18 +25,29 @@ Legenda: **[C]** decidido por Arthur · **[H]** proposta, aguardando aprovação
 
 ```text
 apps/landing/
-├── public/              favicons, og-image, fontes
+├── public/              favicons, og-image.png, brand/ (lockup do rodapé)
 ├── src/
 │   ├── config/contact.ts
 │   ├── components/      Header, Hero, SpecSheet, SymptomTicker, Problem, ReworkLoop, ProcessDemo, Difference, GetStarted, Faq, FinalCta, Footer, StickyCta, ContactButton
 │   ├── layouts/Base.astro
 │   ├── pages/index.astro
 │   ├── pages/404.astro
-│   └── styles/global.css
+│   ├── pages/robots.txt.ts   gerados no build a partir de `site`
+│   ├── pages/sitemap.xml.ts
+│   ├── scripts/         utilitários de script compartilhados: in-view.ts (visibilidade), reveal.ts (entrada de seção)
+│   └── styles/global.css     tokens (@theme do Tailwind), fontes @font-face e base
 ├── astro.config.mjs
 ├── Dockerfile
 └── nginx.conf
 ```
+
+### Notas de implementação (L1, 13/10/2026)
+
+- **Fontes:** `@fontsource/inter`, `@fontsource/inter-tight` e `@fontsource/geist-mono`, só os arquivos `woff2` latinos, declarados em `global.css`. O Vite os emite em `/_astro/` com hash; só a Inter Tight 600 tem *preload*.
+- **Tailwind 4:** carrega apenas `theme` e `utilities` (sem *preflight*, a base é a do protótipo). Os tokens estão em `@theme static`, e os componentes os usam como variáveis CSS em estilos do próprio componente.
+- **Aprimoramento progressivo:** um script inline mínimo no `<head>` adiciona a classe `js` ao `<html>`. Estados que dependem de JavaScript (revelação, abas da demonstração) só valem sob `.js`; sem ela, o conteúdo aparece completo.
+- **Destino de contato:** `src/config/contact.ts` lê `PUBLIC_WHATSAPP_*`; se ausentes, usa os valores de [routes.md §2](routes.md). O `href` é gerado no build, então os botões funcionam sem JavaScript.
+- **nginx:** redireciona `www.` e `X-Forwarded-Proto: http` para `https://zarcosoftware.com.br` (o TLS termina no proxy do Coolify).
 
 ## 3. Qualidade
 

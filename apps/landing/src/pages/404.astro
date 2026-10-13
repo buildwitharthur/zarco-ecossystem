@@ -1,0 +1,54 @@
+---
+import ContactButton from '../components/ContactButton.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Base from '../layouts/Base.astro';
+---
+
+<!-- TELA-LP-02: servida pelo nginx com status 404; fora dos buscadores. -->
+<Base title="Página não encontrada | Zarco" description="Esta página não existe." noindex>
+  <Header />
+  <main class="relative z-1 min-h-[70vh] pt-(--header)">
+    <div class="frame">
+      <div class="inner">
+        <p class="idx">
+          <b>404</b> / Página não encontrada
+        </p>
+        <h1 class="h2">Esta página não existe.</h1>
+        <p class="lead">O endereço pode ter mudado ou ter sido digitado com um erro.</p>
+        <div class="actions">
+          <a class="back" href="/">
+            Voltar para a página principal
+          </a>
+          <ContactButton />
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .inner {
+    display: grid;
+    justify-items: start;
+    gap: 24px;
+    padding-block: 96px;
+  }
+  @media (min-width: 960px) {
+    .inner {
+      padding-block: 160px;
+    }
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    margin-top: 8px;
+  }
+  .back {
+    font-weight: 500;
+    text-underline-offset: 4px;
+  }
+</style>

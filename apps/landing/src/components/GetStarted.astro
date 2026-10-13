@@ -1,0 +1,153 @@
+---
+import ContactButton from './ContactButton.astro';
+
+// S7 · 04 / Como começar (RF-LP-11): mensagem → conversa gratuita → proposta.
+const steps = [
+  {
+    tag: '01 / Mensagem',
+    title: 'Conte o caso pelo WhatsApp.',
+    text: 'Como o processo funciona hoje e o que incomoda. Sem formulário.',
+  },
+  {
+    tag: '02 / Conversa',
+    title: 'Diagnóstico gratuito.',
+    text: 'Uma conversa para entender onde o processo trava. Sem compromisso.',
+  },
+  {
+    tag: '03 / Proposta',
+    title: 'Escopo e valor por escrito.',
+    text: 'Só se fizer sentido construir. Às vezes a recomendação é outra.',
+  },
+];
+---
+
+<section class="sec" aria-labelledby="t-start">
+  <div class="frame">
+    <div class="inner">
+      <div class="sec-head reveal">
+        <p class="idx">
+          <b>04</b> / Como começar
+        </p>
+        <h2 class="h2" id="t-start">
+          Começar é uma conversa.
+        </h2>
+      </div>
+      <div class="start">
+        <ol class="steps reveal" id="steps">
+          {steps.map((step, i) => (
+            <li style={`--i:${i}`}>
+              <span class="num idx">
+                <b>{step.tag}</b>
+                {i < steps.length - 1 && <i />}
+              </span>
+              <h3 class="h3">{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="start__cta reveal" style="--i:2">
+          <ContactButton />
+          <ContactButton variant="phone" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .start {
+    display: grid;
+    gap: 40px;
+  }
+  @media (min-width: 1040px) {
+    .start {
+      grid-template-columns: 1fr 280px;
+      align-items: end;
+    }
+  }
+  .steps {
+    position: relative;
+    display: grid;
+    border: 1px solid var(--color-line-2);
+  }
+  @media (min-width: 760px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .steps > li + li {
+      border-left: 1px solid var(--color-line);
+    }
+  }
+  .steps > li {
+    position: relative;
+    padding: 28px;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    background: var(--color-surface);
+  }
+  @media (max-width: 759px) {
+    .steps > li + li {
+      border-top: 1px solid var(--color-line);
+    }
+  }
+  @media (max-width: 639px) {
+    .steps > li {
+      padding: 22px;
+    }
+  }
+  .num {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  /* Tecla */
+  .num b {
+    display: inline-grid;
+    place-items: center;
+    height: 24px;
+    padding: 0 9px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    background:
+      linear-gradient(180deg, #25262b, #1a1b1e) padding-box,
+      linear-gradient(180deg, var(--color-edge-hi), var(--color-edge-lo)) border-box;
+    box-shadow:
+      0 1px 2px var(--color-shade),
+      inset 0 1px 0 rgb(255 255 255 / 0.06);
+  }
+  /* A linha "se desenha" até o próximo passo */
+  .num i {
+    flex: 1;
+    height: 1px;
+    background: var(--color-line-2);
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.9s var(--ease-standard);
+    transition-delay: calc(var(--i) * 250ms + 200ms);
+  }
+  .steps.is-in .num i,
+  :global(html:not(.js)) .num i {
+    transform: scaleX(1);
+  }
+  .steps p {
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--color-text-2);
+  }
+  .start__cta {
+    display: grid;
+    gap: 14px;
+    justify-items: start;
+  }
+</style>
+
+<script>
+  import { onView } from '../scripts/in-view';
+
+  const steps = document.getElementById('steps');
+  if (steps)
+    onView(steps, (entry) => entry.target.classList.add('is-in'), undefined, { threshold: 0.3 });
+</script>

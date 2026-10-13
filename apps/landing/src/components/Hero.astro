@@ -1,0 +1,89 @@
+---
+import ContactButton from './ContactButton.astro';
+import SpecSheet from './SpecSheet.astro';
+---
+
+<section class="hero" aria-labelledby="t-hero">
+  <div class="frame">
+    <div class="inner hero__grid">
+      <div class="hero__text">
+        <p class="idx reveal">
+          <b>Zarco</b> / Engenharia de software
+        </p>
+        <h1
+          class="reveal font-display text-[clamp(44px,7vw,96px)] leading-[0.92] font-semibold tracking-[-0.04em] text-balance wrap-break-word hyphens-manual max-[639px]:text-[clamp(40px,11vw,56px)] max-[359px]:text-[36px]"
+          style="--i:1"
+          id="t-hero"
+        >
+          Sistemas feitos para o processo da sua empresa.
+        </h1>
+        <p class="lead reveal" style="--i:2">
+          A Zarco entende como a sua operação funciona hoje e constrói o sistema que tira o processo
+          da planilha. Do tamanho do problema.
+        </p>
+        <div class="hero__cta reveal" style="--i:3">
+          <ContactButton id="hero-cta" />
+          <span class="hero__note">
+            Diagnóstico gratuito. Orçamento depois de entender o problema.
+          </span>
+        </div>
+      </div>
+      <SpecSheet />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 72px 0;
+  }
+  @media (min-width: 960px) {
+    .hero {
+      padding: 120px 0 104px;
+    }
+  }
+  .hero__grid {
+    display: grid;
+    gap: 48px;
+  }
+  @media (min-width: 1040px) {
+    .hero__grid {
+      grid-template-columns: 1fr 300px;
+      gap: 64px;
+      align-items: end;
+    }
+  }
+  .hero__text {
+    display: grid;
+    gap: 28px;
+    justify-items: start;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 24px;
+    margin-top: 4px;
+  }
+  .hero__note {
+    font-size: 15px;
+    color: var(--color-text-2);
+  }
+  /* No tablet, a linha de apoio fica abaixo do botão */
+  @media (min-width: 640px) and (max-width: 959px) {
+    .hero__cta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  @media (max-width: 639px) {
+    .hero__cta {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+    .hero__cta :global(.btn) {
+      width: 100%;
+    }
+  }
+</style>

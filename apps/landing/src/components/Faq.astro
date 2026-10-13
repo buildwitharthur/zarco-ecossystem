@@ -1,0 +1,155 @@
+---
+// S8 · 05 / Perguntas (RF-LP-12). Respostas em rascunho até a revisão de Arthur (P8).
+const questions = [
+  {
+    q: 'Quanto custa um sistema?',
+    a: 'Depende do problema. Por isso a Zarco não passa preço antes de entender o processo. O diagnóstico é gratuito e, se fizer sentido construir, a proposta chega com escopo e valor por escrito.',
+  },
+  {
+    q: 'Quanto tempo leva?',
+    a: 'O prazo é definido na proposta, junto com o escopo. O sistema é construído em ciclos curtos, e você acompanha o andamento durante o projeto.',
+  },
+  {
+    q: 'Minha empresa é pequena. Faz sentido?',
+    a: 'A Zarco trabalha com pequenas e médias empresas cuja operação já passou do que a planilha sustenta. A solução é dimensionada para o problema, não para um padrão.',
+  },
+  {
+    q: 'E se eu não precisar de um sistema?',
+    a: 'Então a recomendação vai dizer isso. Às vezes uma ferramenta pronta ou uma mudança no processo resolve, e a Zarco recomenda esse caminho.',
+  },
+  {
+    q: 'O código fica comigo?',
+    a: 'Sim. Código, infraestrutura e documentação ficam no nome da sua empresa.',
+  },
+  {
+    q: 'E depois da entrega?',
+    a: 'A Zarco pode acompanhar o sistema depois da entrega, com correções, melhorias e evolução, em um plano de manutenção combinado à parte.',
+  },
+];
+---
+
+<section class="sec" aria-labelledby="t-faq">
+  <div class="frame">
+    <div class="inner">
+      <div class="sec-head reveal">
+        <p class="idx">
+          <b>05</b> / Perguntas
+        </p>
+        <h2 class="h2" id="t-faq">
+          Respostas diretas.
+        </h2>
+      </div>
+      <div class="faq reveal">
+        {questions.map((item, i) => (
+          <details>
+            <summary>
+              <span class="idx">
+                <b>{String(i + 1).padStart(2, '0')}</b>
+              </span>
+              <strong>{item.q}</strong>
+              <span class="plus" aria-hidden="true" />
+            </summary>
+            <p class="ans">{item.a}</p>
+          </details>
+        ))}
+      </div>
+      <p class="idx draft">Rascunho · respostas a revisar por Arthur</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    max-width: 900px;
+    border-top: 1px solid var(--color-line-2);
+  }
+  details {
+    border-bottom: 1px solid var(--color-line-2);
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 44px 1fr 24px;
+    gap: 12px;
+    align-items: center;
+    min-height: 64px;
+    padding: 16px 0;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary strong {
+    font: 600 clamp(18px, 1.8vw, 22px) / 1.25 var(--font-display);
+    letter-spacing: -0.015em;
+  }
+  /* Tecla do índice */
+  summary .idx b {
+    display: inline-grid;
+    place-items: center;
+    min-width: 30px;
+    height: 24px;
+    padding: 0 7px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    background:
+      linear-gradient(180deg, #25262b, #1a1b1e) padding-box,
+      linear-gradient(180deg, var(--color-edge-hi), var(--color-edge-lo)) border-box;
+    box-shadow:
+      0 1px 2px var(--color-shade),
+      inset 0 1px 0 rgb(255 255 255 / 0.06);
+  }
+  @media (hover: hover) {
+    summary:hover .idx b {
+      color: #ff7a45;
+    }
+  }
+  .plus {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    justify-self: end;
+    transition: transform 0.25s var(--ease-standard);
+  }
+  .plus::before,
+  .plus::after {
+    content: '';
+    position: absolute;
+    background: var(--color-text);
+  }
+  .plus::before {
+    left: 6px;
+    top: 0;
+    width: 2px;
+    height: 14px;
+  }
+  .plus::after {
+    top: 6px;
+    left: 0;
+    height: 2px;
+    width: 14px;
+  }
+  details[open] .plus {
+    transform: rotate(45deg);
+  }
+  .ans {
+    padding: 0 36px 22px 56px;
+    max-width: 46em;
+    font-size: 16px;
+    color: var(--color-text-2);
+  }
+  @media (max-width: 639px) {
+    summary {
+      grid-template-columns: 34px 1fr 20px;
+    }
+    .ans {
+      padding: 0 0 20px 46px;
+    }
+  }
+  .draft {
+    display: inline-block;
+    margin-top: 18px;
+  }
+</style>

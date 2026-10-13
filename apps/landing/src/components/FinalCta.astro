@@ -1,0 +1,113 @@
+---
+import ContactButton from './ContactButton.astro';
+---
+
+<section class="final" aria-labelledby="t-final">
+  <div class="frame">
+    <div class="inner">
+      <p class="idx">
+        <b>06</b> / Contato
+      </p>
+      <h2 id="t-final">Conte o seu caso.</h2>
+      <p class="final__text">
+        Uma conversa no WhatsApp para entender o problema e ver se faz sentido construir algo.
+      </p>
+      <div class="final__cta">
+        <ContactButton variant="ink" id="final-cta" />
+        <ContactButton variant="phone" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final {
+    position: relative;
+    z-index: 1;
+    color: var(--color-on-accent);
+    background: linear-gradient(180deg, #ff6a33, #ff5a1f 40%, #f2521b);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.35),
+      inset 0 -1px 0 rgb(120 35 5 / 0.3);
+  }
+  .frame > div {
+    border-inline: 1px solid rgb(23 24 26 / 0.16);
+  }
+  .inner {
+    padding-top: 140px;
+    padding-bottom: 160px;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 28px;
+  }
+  @media (min-width: 960px) {
+    .inner {
+      padding-top: 200px;
+      padding-bottom: 220px;
+    }
+  }
+  @media (max-width: 639px) {
+    .inner {
+      padding-top: 104px;
+      padding-bottom: 120px;
+    }
+  }
+  /* Texto de apoio em cor sólida: ≥ 4,5:1 sobre o laranja (T-L1-12) */
+  .idx {
+    color: rgb(23 24 26 / 0.88);
+  }
+  .idx b {
+    color: var(--color-on-accent);
+  }
+  h2 {
+    font: 600 clamp(52px, 10vw, 136px) / 0.9 var(--font-display);
+    letter-spacing: -0.045em;
+    overflow-wrap: break-word;
+    hyphens: manual;
+    text-wrap: balance;
+  }
+  @media (max-width: 359px) {
+    h2 {
+      font-size: 44px;
+    }
+  }
+  .final__text {
+    max-width: 30em;
+    font-size: clamp(17px, 1.5vw, 20px);
+    color: rgb(23 24 26 / 0.88);
+  }
+  .final__cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 14px 24px;
+    margin-top: 8px;
+  }
+  @media (max-width: 639px) {
+    .final__cta {
+      flex-direction: column;
+      width: 100%;
+    }
+    .final__cta :global(.btn) {
+      width: 100%;
+    }
+  }
+  .final :global(.phone) {
+    color: var(--color-on-accent);
+    border-color: rgb(23 24 26 / 0.35);
+  }
+  .final :global(.phone:hover) {
+    border-color: var(--color-on-accent);
+  }
+  /* A seleção laranja some no bloco laranja: inverte */
+  .final::selection,
+  .final :global(*::selection) {
+    background: var(--color-on-accent);
+    color: var(--color-text);
+  }
+  .final :global(:focus-visible) {
+    outline-color: var(--color-on-accent);
+  }
+</style>

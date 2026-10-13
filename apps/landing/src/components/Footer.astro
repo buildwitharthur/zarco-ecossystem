@@ -1,0 +1,66 @@
+---
+import { contact } from '../config/contact';
+import ContactButton from './ContactButton.astro';
+
+// S10 · sem CNPJ, e-mail, endereço ou redes sociais enquanto não existirem (RN-LP-07).
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="frame">
+    <div class="inner">
+      <img
+        src="/brand/zarco-lockup-vertical-light.svg"
+        width="140"
+        height="56"
+        alt="Zarco, Engenharia de Software"
+      />
+      <div class="footer__info">
+        <span>Atendimento presencial em São Gonçalo, Niterói e região.</span>
+        <ContactButton variant="link" text={`WhatsApp ${contact.phone}`} />
+        <span class="idx">© {year} Zarco</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    z-index: 1;
+    background: var(--color-bg);
+  }
+  .inner {
+    padding-top: 40px;
+    padding-bottom: 112px;
+    display: grid;
+    gap: 24px;
+  }
+  @media (min-width: 960px) {
+    .inner {
+      padding-bottom: 48px;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+    }
+  }
+  img {
+    display: block;
+    width: 140px;
+    height: auto;
+  }
+  .footer__info {
+    display: grid;
+    gap: 6px;
+    font-size: 14.5px;
+    color: var(--color-text-2);
+  }
+  .footer__info :global(a) {
+    text-decoration: none;
+  }
+  @media (min-width: 960px) {
+    .footer__info {
+      text-align: right;
+      justify-items: end;
+    }
+  }
+</style>

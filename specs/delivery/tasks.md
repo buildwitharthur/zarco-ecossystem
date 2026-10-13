@@ -77,6 +77,19 @@
 
 **Objetivo:** reproduzir o [protótipo oficial](../../prototypes/landing/index.html) em Astro, atendendo aos critérios de RF-LP, RNF-LP e TELA-LP. Ref.: [routes.md](../apps/landing/routes.md), [architecture.md](../apps/landing/architecture.md), [design system](../design/design-system/foundations.md), [direção criativa](../design/landing-creative-direction.md).
 
+> **Situação (13/10/2026):** T-L1-01 a T-L1-13 implementadas; T-L1-14 (revisão de qualidade) **não executada**. Nenhuma está marcada `[x]`: falta o PR com o CI verde e a verificação em navegador.
+>
+> **Verificado localmente:** `astro check` (0 erros), `pnpm lint`, Prettier nos arquivos da landing, `pnpm build` (`/`, `/404.html`, `robots.txt`, `sitemap.xml`), imagem Docker e nginx em contêiner (404 com status correto, redirecionamentos de `www.` e `X-Forwarded-Proto: http`, cache longo em `/_astro/`, gzip). No HTML gerado: um único `h1`, nenhuma URL externa além do `wa.me` (oito links, todos com a mesma mensagem), fontes só em `/_astro/`. JavaScript: cerca de 2,8 KB comprimidos no total (orçamento: 15 KB). Contrastes calculados: texto sobre o laranja ≥ 4,9:1; índices ≥ 5,3:1.
+>
+> **Pendente de verificação manual (não havia navegador na máquina):** comparação visual com o protótipo; Lighthouse no celular; teclado e foco; JavaScript desligado; movimento reduzido; 320–1920 px sem rolagem horizontal; validação dos dados estruturados e prévia do Open Graph; demonstração em celular de entrada (PD-05 em [process-demo/tasks.md](../features/process-demo/tasks.md)).
+>
+> **Decisões de implementação a confirmar:**
+> - `contact.ts` usa os valores de routes.md §2 quando `PUBLIC_WHATSAPP_*` estão vazias (o CI e o build local não precisam de `.env`).
+> - Título e descrição da página são provisórios até P2/P-LP-03.
+> - O diagrama do ciclo só anima com JavaScript e sem "movimento reduzido" (sem JavaScript, fica estático). A faixa de sintomas, sem JavaScript ou com movimento reduzido, fica parada e rolável.
+> - Foi criado `src/scripts/` (utilitários compartilhados) e as rotas `robots.txt.ts` e `sitemap.xml.ts`, já registrados em [architecture.md](../apps/landing/architecture.md). Não há dependência de sitemap do Astro.
+> - O texto da meta do CTA final usa cor sólida (88%) em vez dos 78% do protótipo, que ficavam em 4,2:1 sobre o laranja.
+
 - [ ] **T-L1-01 · Tokens e fontes**
   Tokens de foundations §3.1, §4.1, §5–§9 no tema do Tailwind e em variáveis CSS. Inter, Inter Tight e Geist Mono em `woff2` (subconjunto latino) servidas pelo domínio; *preload* só da fonte de título.
   *Pronto quando:* uma página de teste mostra cores e escalas iguais às do protótipo, sem requisições externas.

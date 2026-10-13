@@ -1,0 +1,66 @@
+---
+import ContactButton from './ContactButton.astro';
+---
+
+<!-- B1: aparece quando a ação do hero sai da tela e some quando a do CTA final está visível -->
+<div class="sticky" id="sticky" aria-hidden="true">
+  <ContactButton tabindex={-1} />
+</div>
+
+<style>
+  .sticky {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 60;
+    padding: 10px var(--margin) calc(10px + env(safe-area-inset-bottom));
+    background: rgb(17 18 20 / 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--color-line);
+    transform: translateY(110%);
+    transition: transform 0.35s var(--ease-standard);
+  }
+  .sticky :global(.btn) {
+    width: 100%;
+  }
+  .sticky:global(.is-visible) {
+    transform: none;
+  }
+  @media (min-width: 960px) {
+    .sticky {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { onView } from '../scripts/in-view';
+
+  const sticky = document.getElementById('sticky');
+  const link = sticky?.querySelector('a');
+  const heroCta = document.getElementById('hero-cta');
+  const finalCta = document.getElementById('final-cta');
+
+  if (sticky && link && heroCta && finalCta) {
+    let heroVisible = true;
+    let finalVisible = false;
+
+    const update = () => {
+      const show = !heroVisible && !finalVisible;
+      sticky.classList.toggle('is-visible', show);
+      sticky.setAttribute('aria-hidden', String(!show));
+      link.tabIndex = show ? 0 : -1;
+    };
+
+    onView(
+      heroCta,
+      () => ((heroVisible = true), update()),
+      () => ((heroVisible = false), update()),
+    );
+    onView(
+      finalCta,
+      () => ((finalVisible = true), update()),
+      () => ((finalVisible = false), update()),
+    );
+  }
+</script>

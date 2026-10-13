@@ -1,11 +1,93 @@
 ---
+import Difference from '../components/Difference.astro';
+import Faq from '../components/Faq.astro';
+import FinalCta from '../components/FinalCta.astro';
+import Footer from '../components/Footer.astro';
+import GetStarted from '../components/GetStarted.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ProcessDemo from '../components/ProcessDemo.astro';
+import Problem from '../components/Problem.astro';
+import StickyCta from '../components/StickyCta.astro';
+import SymptomTicker from '../components/SymptomTicker.astro';
+import { contact } from '../config/contact';
+import Base from '../layouts/Base.astro';
+
+// Texto de metadados provisório: revisão final em T-L1-14/P2 (termos de busca: P-LP-03).
+const title = 'Zarco | Engenharia de software para o processo da sua empresa';
+const description =
+  'A Zarco entende como a sua operação funciona e constrói o sistema que tira o processo da planilha. Diagnóstico gratuito, escopo por escrito e código no nome da sua empresa.';
+
+// Sem endereço, CNPJ ou e-mail: a Zarco ainda não os divulga (CA-LP-02N.4).
+const site = Astro.site ?? new URL('https://zarcosoftware.com.br');
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Zarco',
+  alternateName: 'Zarco Engenharia de Software',
+  description,
+  url: site.href,
+  logo: new URL('/apple-touch-icon.png', site).href,
+  image: new URL('/og-image.png', site).href,
+  telephone: contact.phone.replace(/\s|-/g, ''),
+  knowsLanguage: 'pt-BR',
+  serviceType: 'Desenvolvimento de software sob medida',
+  areaServed: [
+    { '@type': 'City', name: 'São Gonçalo' },
+    { '@type': 'City', name: 'Niterói' },
+  ],
+};
 ---
 
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Zarco</title>
-  </head>
-  <body></body>
-</html>
+<Base title={title} description={description} jsonLd={jsonLd}>
+  <Header />
+  <main class="relative z-1 pt-(--header)">
+    <Hero />
+    <SymptomTicker />
+    <Problem />
+    <ProcessDemo />
+    <Difference />
+    <div class="rule">
+      <div class="frame"></div>
+    </div>
+    <GetStarted />
+    <div class="rule">
+      <div class="frame"></div>
+    </div>
+    <Faq />
+    <FinalCta />
+  </main>
+  <Footer />
+  <StickyCta />
+</Base>
+
+<style>
+  /* Divisória de largura total com a marca "+" nos cruzamentos dos trilhos (components §1) */
+  .rule {
+    position: relative;
+    z-index: 1;
+    height: 1px;
+    background: var(--color-line);
+  }
+  .rule .frame {
+    position: relative;
+    height: 1px;
+  }
+  .rule .frame::before,
+  .rule .frame::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    width: 11px;
+    height: 11px;
+    background:
+      linear-gradient(var(--color-text-3), var(--color-text-3)) center / 1px 11px no-repeat,
+      linear-gradient(var(--color-text-3), var(--color-text-3)) center / 11px 1px no-repeat;
+  }
+  .rule .frame::before {
+    left: calc(var(--margin) - 5px);
+  }
+  .rule .frame::after {
+    right: calc(var(--margin) - 6px);
+  }
+</style>

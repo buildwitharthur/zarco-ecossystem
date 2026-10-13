@@ -1,0 +1,145 @@
+---
+// Diagrama do ciclo de retrabalho (S4). Decorativo: o texto do problema está nas 4 células.
+// Estático sem JavaScript e com "movimento reduzido"; o script só anima enquanto visível.
+const path = 'M160 46 L270 200 L50 200 Z';
+---
+
+<div class="diagram" aria-hidden="true">
+  <svg class="loop" id="loop" viewBox="0 0 320 260" data-path={path}>
+    <path class="edge" d={path}></path>
+    <circle class="halo" cx="160" cy="46" r="12"></circle>
+    <circle class="dot" cx="160" cy="46" r="5"></circle>
+    <g class="node">
+      <rect x="110" y="28" width="100" height="36" rx="5"></rect>
+      <text x="160" y="46">
+        PLANILHA
+      </text>
+    </g>
+    <g class="node">
+      <rect x="214" y="182" width="104" height="36" rx="5"></rect>
+      <text x="266" y="200">
+        WHATSAPP
+      </text>
+    </g>
+    <g class="node">
+      <rect x="2" y="182" width="96" height="36" rx="5"></rect>
+      <text x="50" y="200">
+        SISTEMA
+      </text>
+    </g>
+  </svg>
+  <div class="count idx">
+    <span>Ciclo de retrabalho</span>
+    <span>
+      Redigitado <b id="loop-n">×1</b>
+    </span>
+  </div>
+</div>
+
+<style>
+  .diagram {
+    order: -1;
+    position: relative;
+    min-height: 300px;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-line);
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+  @media (min-width: 900px) {
+    .diagram {
+      order: 0;
+      border-bottom: 0;
+    }
+  }
+  .loop {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    overflow: visible;
+  }
+  .edge {
+    fill: none;
+    stroke: var(--color-line-2);
+    stroke-width: 1.2;
+    stroke-dasharray: 4 5;
+  }
+  .node rect {
+    fill: var(--color-surface-raised);
+    stroke: var(--color-line-2);
+    stroke-width: 1;
+  }
+  .node text {
+    font: 500 12px var(--font-mono);
+    fill: var(--color-text);
+    letter-spacing: 0.04em;
+    text-anchor: middle;
+    dominant-baseline: middle;
+  }
+  .dot {
+    fill: var(--color-danger);
+  }
+  .halo {
+    fill: var(--color-danger);
+    opacity: 0.15;
+  }
+  .count {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .count b {
+    color: var(--color-danger);
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+
+<script>
+  import { onView, prefersReducedMotion } from '../scripts/in-view';
+
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const LAP_SECONDS = 4;
+
+  const loop = document.getElementById('loop') as SVGSVGElement | null;
+  const counter = document.getElementById('loop-n');
+  const path = loop?.dataset.path;
+
+  if (loop && counter && path && !prefersReducedMotion()) {
+    // As pontas do ciclo percorrem o triângulo; só entram no DOM quando há movimento permitido.
+    for (const selector of ['.halo', '.dot']) {
+      const circle = loop.querySelector(selector);
+      if (!circle) continue;
+      circle.removeAttribute('cx');
+      circle.removeAttribute('cy');
+      const motion = document.createElementNS(SVG_NS, 'animateMotion');
+      motion.setAttribute('dur', `${LAP_SECONDS}s`);
+      motion.setAttribute('repeatCount', 'indefinite');
+      motion.setAttribute('path', path);
+      circle.appendChild(motion);
+    }
+
+    let laps = 1;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    loop.pauseAnimations();
+
+    onView(
+      loop,
+      () => {
+        loop.unpauseAnimations();
+        clearInterval(timer);
+        timer = setInterval(() => {
+          laps += 1;
+          counter.textContent = `×${laps}`;
+        }, LAP_SECONDS * 1000);
+      },
+      () => {
+        loop.pauseAnimations();
+        clearInterval(timer);
+      },
+    );
+  }
+</script>

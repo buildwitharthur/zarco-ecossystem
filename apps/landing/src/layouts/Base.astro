@@ -1,0 +1,105 @@
+---
+import interTightLatin600 from '@fontsource/inter-tight/files/inter-tight-latin-600-normal.woff2?url';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Página fora dos buscadores (404). */
+  noindex?: boolean;
+  /** Dados estruturados (schema.org), serializados no HTML. */
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, noindex = false, jsonLd } = Astro.props;
+
+const site = Astro.site ?? new URL('https://zarcosoftware.com.br');
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL('/og-image.png', site).href;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#111214" />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Zarco" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Zarco, Engenharia de Software" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href={interTightLatin600} as="font" type="font/woff2" crossorigin />
+
+    <!-- Marca o documento como "com JavaScript" antes da primeira pintura (aprimoramento progressivo) -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="i-chat" viewBox="0 0 24 24">
+        <path
+          d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linejoin="round"
+        ></path>
+        <path
+          d="M9 8.6c.3-.4.7-.4 1-.2l.9 1.6c.1.3 0 .6-.2.8l-.5.5c.5 1.1 1.4 2 2.5 2.5l.5-.5c.2-.2.5-.3.8-.2l1.6.9c.3.2.3.7-.1 1-1 .8-2.3.7-3.5 0a8.5 8.5 0 0 1-3.2-3.2c-.7-1.2-.8-2.5.2-3.2Z"
+          fill="currentColor"
+        ></path>
+      </symbol>
+      <symbol id="i-pause" viewBox="0 0 12 12">
+        <path
+          d="M3 1.5v9M9 1.5v9"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        ></path>
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 12 12">
+        <path d="M3 1.5v9l7-4.5z" fill="currentColor"></path>
+      </symbol>
+      <symbol id="i-replay" viewBox="0 0 12 12">
+        <path
+          d="M2.5 6a3.5 3.5 0 1 0 1-2.5M2 1.5v2.5h2.5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </symbol>
+    </svg>
+
+    <div class="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+      <div class="frame h-full">
+        <div class="h-full border-x border-line"></div>
+      </div>
+    </div>
+
+    <slot />
+
+    <script>
+      import '../scripts/reveal';
+    </script>
+  </body>
+</html>
